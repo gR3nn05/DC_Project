@@ -1,0 +1,11 @@
+TestCPUFixedPoint.java: 
+Execution time: 47.90 ms
+Result: 987654321
+Estimated MOPS: 459.0
+
+TestCPUFixedVsFloatingPoint.java:
+Fixed-point time: 10.23 ms
+Fixed result: 195312000
+
+Floating-point time: 85.67 ms
+Floating result: 39062500.0
