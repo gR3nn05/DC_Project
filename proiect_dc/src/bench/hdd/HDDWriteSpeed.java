@@ -12,15 +12,12 @@ public class HDDWriteSpeed implements IBenchmark {
 
     @Override
     public void initialize(Object... params) {
-        // Nothing specific to initialize
+        // No initialization needed
     }
-
-
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException(
-                "Method not implemented. Use run(Object...) instead");
+        throw new UnsupportedOperationException("Use run(Object...) instead");
     }
 
     @Override
@@ -29,20 +26,18 @@ public class HDDWriteSpeed implements IBenchmark {
             throw new IllegalArgumentException("Expected two parameters: option (\"fs\" or \"fb\"), clean (Boolean)");
         }
 
-        String option = (String) options[0];   // "fs" or "fb"
-        Boolean clean = (Boolean) options[1];  // true or false
+        String option = (String) options[0];
+        boolean clean = (Boolean) options[1];
 
-        // Use consistent prefix for test files
         String prefix = "C:\\000-bench\\write-";
         String suffix = ".dat";
         int minIndex = 0;
         int maxIndex = 8;
 
-        // Default sizes
-        long fileSize = 512L * 1024 * 1024;   // 512 MB
-        int bufferSize = 4 * 1024;             // 4 KB
+        long fileSize = 512L * 1024 * 1024;  // 512 MB
+        int bufferSize = 4 * 1024;           // 4 KB
 
-        cancelled = false;  // reset cancel flag before run
+        cancelled = false;
         lastWriter = new FileWriter();
 
         try {
@@ -58,35 +53,38 @@ public class HDDWriteSpeed implements IBenchmark {
         }
     }
 
-    @Override
-    public void clean() {
-        File directory = new File("C:/000-bench");
-        if (!directory.exists()) {
-            System.out.println("No directory to clean: " + directory.getAbsolutePath());
-            return;
-        }
-
-        File[] files = directory.listFiles((dir, name) ->
-                name.startsWith("write-") && name.endsWith(".dat"));
-
-        if (files != null) {
-            for (File file : files) {
-                if (file.delete()) {
-                    System.out.println("Deleted file: " + file.getName());
-                } else {
-                    System.out.println("Failed to delete file: " + file.getName());
-                }
-            }
-        }
-
-        // Try deleting directory if empty
-        if (directory.isDirectory() && directory.list().length == 0) {
-            if (directory.delete()) {
-                System.out.println("Deleted empty directory: " + directory.getAbsolutePath());
-            }
+    public void runFixedFileSizeBenchmark(String fileName, long fileSize, int bufferSize, boolean clean) {
+        cancelled = false;
+        lastWriter = new FileWriter();
+        try {
+            lastWriter.streamWriteFixedFileSizeSingle(fileName, fileSize, bufferSize, clean, this);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
+    public void runFixedBufferSizeBenchmark(String fileName, long fileSize, int bufferSize, boolean clean) {
+        cancelled = false;
+        lastWriter = new FileWriter();
+        try {
+            lastWriter.streamWriteFixedBufferSizeSingle(fileName, fileSize, bufferSize, clean, this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void clean() {
+        File directory = new File("C:/000-bench");
+        if (!directory.exists()) return;
+
+        File[] files = directory.listFiles((dir, name) -> name.startsWith("write-") && name.endsWith(".dat"));
+        if (files != null) {
+            for (File file : files) file.delete();
+        }
+
+        if (directory.list().length == 0) directory.delete();
+    }
 
     public String getResult() {
         if (lastWriter != null) {
