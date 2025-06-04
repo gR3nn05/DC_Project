@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="javafx.swing">
+    <CLASSES>
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/javafx.swing.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/javafx.media.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/javafx-swt.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/javafx.base.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/javafx.fxml.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/javafx.graphics.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/javafx.controls.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/jdk.jsobject.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/javafx.web.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/jfx.incubator.input.jar!/" />
+      <root url="jar://C:/javafx-sdk-24.0.1/lib/jfx.incubator.richtext.jar!/" />
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/UPTBenchmarking/src" />
+      <root url="file://$PROJECT_DIR$/src" />
+    </SOURCES>
+  </library>
+</component>
